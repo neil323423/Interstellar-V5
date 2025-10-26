@@ -1,53 +1,167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="referrer" content="no-referrer" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
-    <title id="t">Home</title>
-    <link rel="stylesheet" href="/assets/css/global.css?v=6" />
-    <link rel="stylesheet" href="/assets/css/h.css?v=01" />
-    <link rel="stylesheet" href="/assets/css/nav.css?v=01" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840529569014734"
-     crossorigin="anonymous"></script>
-  </head>
-  <body class="center" onload="SplashT">
-    <div class="fixed-nav-bar"></div>
-    <div id="particles-js">
-      <script rel="preload" src="https://cdn.jsdelivr.net/particles.js/2.0.0/"></script>
-      <div class="main">
-<h1 class="title">&#73;&#110;&#116;&#101;&#114;&#115;&#116;&#101;&#108;&#108;&#97;&#114;</h1>
-        <p id="splash"></p>
-        <div class="search-container">
-          <form id="fv" method="POST">
-            <input
-              id="iv"
-              class="search-home"
-              placeholder="Search or enter a URL"
-              type="text" />
-          </form>
-        </div>
-      </div>
-    </div>
-    <script src="assets/js/i.js?v=02"></script>
-    <script src="/assets/js/home.js?v=00"></script>
-    <script src="./assets/ultra/bundle.js?v=10-02-2024"></script>
-    <script src="./assets/ultra/config.js?v=10-02-2024"></script>
-    <script src="assets/js/f.js"></script>
-    <script src="/assets/js/m.js?v=07"></script>
-    <!-- DO NOT REMOVE-->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag("js", new Date())
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kronos - Secure V3</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: hsl(240,10%,3.9%);
+    color: hsl(0,0%,98%);
+    overflow-x:hidden;
+}
 
-      gtag("config", "G-WKJQ5QHQTJ")
-    </script>
-    <!-- DO NOT REMOVE-->
-  </body>
+/* Particle background */
+#particles-js {
+    position: fixed;
+    top: 60px; /* below nav */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    z-index: 0;
+}
+
+/* Styled Secure Nav */
+nav {
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 2rem;
+    background: rgba(24,24,27,0.6);
+    backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(63,63,70,0.3);
+    border-radius:0 0 12px 12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.nav-left { display:flex; align-items:center; gap:1rem; }
+.planet-icon { width:2rem; height:2rem; border-radius:50%; background: linear-gradient(135deg, hsl(44,0%,100%), hsl(0,0%,65%)); box-shadow:0 0 20px rgba(255,255,255,0.4); }
+.nav-link { color:hsl(240,5%,65%); text-decoration:none; padding:0.5rem 1rem; font-weight:500; transition: all 0.3s ease; }
+.nav-link:hover { color:hsl(0,0%,98%); transform: scale(1.05); }
+.user-avatar { width:2rem; height:2rem; border-radius:50%; background: hsl(263,0%,100%); display:flex; align-items:center; justify-content:center; font-size:0.875rem; cursor:pointer; box-shadow:0 0 10px rgba(0,0,0,0.3); transition: transform 0.2s; }
+.user-avatar:hover { transform: scale(1.1); }
+
+main {
+    position: relative; z-index:10;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:100vh;
+    padding:6rem 1rem 1rem;
+}
+
+.title-container { text-align:center; margin-bottom:4rem; }
+h1 { font-size:6rem; font-weight:bold; color:white; margin-bottom:1rem; letter-spacing:-0.05em; text-shadow:0 0 40px rgba(255,255,255,0.6),0 0 80px rgba(255,255,255,0.4),0 0 120px rgba(255,255,255,0.2); }
+.subtitle { font-size:1.5rem; color:hsl(240,5%,65%); font-weight:300; }
+
+.search-container { width:100%; max-width:42rem; margin-bottom:3rem; }
+.search-bar { position: relative; }
+.search-input {
+    width:100%; padding:1rem 3rem; border-radius:9999px; border:none;
+    background: rgba(24,24,27,0.6); backdrop-filter: blur(12px);
+    border:1px solid rgba(63,63,70,0.3); color:white;
+    font-size:1rem; outline:none; transition: all 0.3s;
+}
+.search-input:focus { border-color:hsl(0,0%,93%); box-shadow:0 0 20px rgba(255,255,255,0.4); }
+.search-icon { position:absolute; left:1.25rem; top:50%; transform:translateY(-50%); color:hsl(240,5%,65%); }
+
+.apps-grid {
+    display:grid; grid-template-columns: repeat(auto-fit,minmax(5rem,1fr)); gap:2rem;
+    max-width:48rem; width:100%;
+}
+.app-item { display:flex; flex-direction:column; align-items:center; gap:0.75rem; cursor:pointer; transition: transform 0.2s; text-decoration:none; color:hsl(0,0%,98%); }
+.app-item:hover { transform:translateY(-4px); }
+.app-icon { width:4rem; height:4rem; border-radius:1rem; background:rgba(24,24,27,0.6); backdrop-filter:blur(12px); border:1px solid rgba(63,63,70,0.3); display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.app-item:hover .app-icon { border-color:hsl(0,0%,83%); box-shadow:0 0 20px rgba(255,255,255,0.4); }
+.app-name { font-size:0.875rem; color:hsl(240,5%,65%); }
+
+.version-badge { position:fixed; bottom:2rem; left:2rem; z-index:50; padding:0.5rem 1rem; border-radius:9999px; display:flex; align-items:center; gap:0.5rem; background: rgba(24,24,27,0.6); backdrop-filter:blur(12px);}
+.version-text { font-size:0.875rem; color:hsl(240,5%,84%); font-weight:500; }
+.status-dot { width:0.5rem; height:0.5rem; border-radius:50%; background:rgb(34,197,94); }
+
+@media(max-width:768px){ h1{font-size:3rem;} .apps-grid{grid-template-columns:repeat(4,1fr);} }
+</style>
+</head>
+<body onload="SplashT">
+
+<div id="particles-js"></div>
+
+<nav>
+    <div class="nav-left">
+        <div class="planet-icon"></div>
+        <a href="new-ui.html" class="nav-link">Home</a>
+        <a href="apps.html" class="nav-link">Apps</a>
+        <a href="games.html" class="nav-link">Games</a>
+    </div>
+    <div class="user-avatar">👤</div>
+</nav>
+
+<main>
+    <div class="title-container">
+        <h1>Kronos</h1>
+        <p class="subtitle" id="splash"></p>
+    </div>
+
+    <div class="search-container">
+        <form id="fv" method="POST" onsubmit="return goSearch()">
+            <div class="search-bar">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input id="iv" class="search-input" placeholder="Search or enter a URL" type="text" />
+            </div>
+        </form>
+    </div>
+
+
+</main>
+
+<div class="version-badge glass-panel">
+    <span class="version-text">Version 2.0</span>
+    <div class="status-dot"></div>
+</div>
+
+<script src="assets/js/i.js?v=02"></script>
+<script src="/assets/js/home.js?v=00"></script>
+<script src="./assets/ultra/bundle.js?v=10-02-2024"></script>
+<script src="./assets/ultra/config.js?v=10-02-2024"></script>
+<script src="assets/js/f.js"></script>
+<script src="/assets/js/m.js?v=07"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840529569014734" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-WKJQ5QHQTJ");
+
+// Redirect search or buttons via unblocker
+function goSearch(url) {
+    const input = url || document.getElementById('iv').value;
+    if(!input) return false;
+    window.location.href = 'unblocker.html?url=' + encodeURIComponent(input);
+    return false;
+}
+</script>
+
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.8 },
+    size: { value: 2 },
+    line_linked: { enable: false },
+    move: { enable: true, speed: 0.6 }
+  },
+  retina_detect: true
+});
+</script>
+
+</body>
 </html>
