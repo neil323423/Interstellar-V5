@@ -32,22 +32,44 @@
     @keyframes twinkle { 0%,100%{opacity:0;} 50%{opacity:1;} }
 
     /* NAVBAR */
-    nav.fixed-nav-bar { position: fixed; top:0; left:0; right:0; z-index:50; padding:1rem 2rem; transition: box-shadow 0.3s ease, background 0.3s ease; }
-    nav.fixed-nav-bar.scrolled { box-shadow:0 8px 20px rgba(0,0,0,0.4); background: rgba(24,24,27,0.85); }
-    .nav-content { display:flex; justify-content:space-between; align-items:center; max-width:1400px; margin:0 auto; background:var(--glass-bg); backdrop-filter:blur(12px); border-radius:1rem; border:1px solid rgba(63,63,70,0.3); }
+    nav.fixed-nav-bar {
+        position: fixed;
+        top:0;
+        left:0;
+        right:0;
+        z-index:50;
+        padding:1rem 2rem;
+        background: rgba(24,24,27,0.5);
+        backdrop-filter: blur(16px);
+        border-radius: 0 0 12px 12px;
+        box-shadow:0 4px 20px rgba(0,0,0,0.3);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav.fixed-nav-bar.scrolled { 
+        box-shadow:0 8px 20px rgba(0,0,0,0.4);
+        background: rgba(24,24,27,0.7);
+    }
+    .nav-content { 
+        display:flex; 
+        justify-content:space-between; 
+        align-items:center; 
+        max-width:1400px; 
+        margin:0 auto;
+    }
     .nav-left { display:flex; align-items:center; gap:1rem; }
     .planet-icon { width:2rem; height:2rem; background:linear-gradient(135deg,hsl(44,0%,100%),hsl(0,0%,65%)); border-radius:50%; box-shadow:0 0 20px rgba(255,255,255,0.4); }
-    .nav-link { color:hsl(240,5%,65%); text-decoration:none; padding:0.5rem 1rem; transition: color 0.2s; }
-    .nav-link:hover { color:hsl(0,0%,98%); }
-    .user-avatar { width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; background:white; }
+    .nav-link { color:hsl(240,5%,65%); text-decoration:none; padding:0.5rem 1rem; transition: color 0.2s, transform 0.2s; }
+    .nav-link:hover { color:hsl(0,0%,98%); transform: scale(1.05); }
+    .user-avatar { width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; background:white; cursor:pointer; box-shadow:0 0 10px rgba(0,0,0,0.3); transition: transform 0.2s;}
+    .user-avatar:hover { transform: scale(1.1); }
 
     /* TITLE */
-    .title-container { text-align:center; margin:6rem 0 4rem 0; position:relative; z-index:10; }
+    .title-container { text-align:center; margin:120px 0 2rem 0; position:relative; z-index:10; } /* added top margin for navbar */
     .title-container h1 { font-family:'Orbitron', monospace; font-size:6rem; font-weight:bold; color:white; margin-bottom:1rem; letter-spacing:-0.05em;
         text-shadow:0 0 40px rgba(255,255,255,0.6),0 0 80px rgba(255,255,255,0.4),0 0 120px rgba(255,255,255,0.2); }
     .subtitle { font-size:1.5rem; color:hsl(240,5%,65%); font-weight:300; }
 
-    /* CONTROLS */
+    /* SEARCH CONTROLS */
     .controls { display:flex; justify-content:center; gap:10px; margin-bottom:3rem; flex-wrap:wrap; z-index:10; position:relative; }
     .controls input, .controls select {
         padding:12px 20px; border-radius:9999px; border:1px solid rgba(255,255,255,0.3);
@@ -78,7 +100,10 @@
         margin-top:1rem; padding:0.5rem 1rem; border-radius:1rem; border:none; cursor:pointer; font-weight:bold;
     }
 
-    @media (max-width:768px) { .title-container h1{font-size:3rem;} .zone-grid{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:768px) { 
+        .title-container h1{font-size:3rem;} 
+        .zone-grid{grid-template-columns:repeat(2,1fr);} 
+    }
 </style>
 </head>
 <body>
@@ -156,12 +181,7 @@ const navbar=document.getElementById('navbar');
 window.addEventListener('scroll', ()=>{ window.scrollY>10?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled'); });
 
 /* GAME ZONES */
- const zones = [
-
-
-              { "name": "1", "url": "games/cl1.html" },
-              { "name": "10 Bullets", "url": "games/cl10bullet.html" },
-              { "name": "10 Minutes Till Dawn", "url": "games/cl10minutestildawn.html" },
+const zones = [
               { "name": "10-103 Null Kevin", "url": "games/clnullkevin.html" },
               { "name": "12 Mini Battles", "url": "games/cl12minibattles.html" },
               { "name": "1 On 1 Soccer", "url": "games/cl1on1soccer.html" },
@@ -1910,7 +1930,7 @@ window.addEventListener('scroll', ()=>{ window.scrollY>10?navbar.classList.add('
 
 
 
-        ];
+];
 
 const container = document.getElementById('container');
 const allSummary = document.getElementById('allSummary');
